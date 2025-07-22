@@ -1,15 +1,93 @@
-import React from 'react';
+// import React from 'react';
+// import { Link } from 'react-router-dom';
+// import HamburgerMenu from './HamburgerMenu';
+
+
+// const Navbar: React.FC = () => {
+//   return (
+//     <nav style={styles.navbar}>
+//       <div style={styles.left}>
+//         <HamburgerMenu />
+//       </div>
+
+//       <div style={styles.center}>
+//         <Link to="/" style={styles.link}>Home</Link>
+//         <Link to="/about" style={styles.link}>About</Link>
+//         <Link to="/blogs" style={styles.link}>Blogs</Link>
+//         <Link to="/tutorials" style={styles.link}>Tutorials</Link>
+//         <Link to="/contact" style={styles.link}>Contact</Link>
+//       </div>
+
+      
+//     </nav>
+//   );
+// };
+
+// const styles: { [key: string]: React.CSSProperties } = {
+//   navbar: {
+//     display: 'flex',
+//     alignItems: 'center',
+//     justifyContent: 'space-between',
+//     padding: '0.75rem 1.5rem',
+//     backgroundColor: '#f0f0f0',
+//     borderBottom: '1px solid #ddd',
+//   },
+//   left: {
+//     flex: '0 0 auto',
+//   },
+//   center: {
+//     flex: '1 1 auto',
+//     display: 'flex',
+//     justifyContent: 'center',
+//     gap: '1.5rem',
+//   },
+//   right: {
+//     flex: '0 0 auto',
+//   },
+//   link: {
+//     textDecoration: 'none',
+//     color: '#333',
+//     fontWeight: 500,
+//     fontSize: '1rem',
+//   },
+// };
+
+// export default Navbar;
+
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import HamburgerMenu from './HamburgerMenu';
 
-
 const Navbar: React.FC = () => {
+  const [showNavbar, setShowNavbar] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY > lastScrollY && currentScrollY > 50) {
+        setShowNavbar(false); // scrolling down
+      } else {
+        setShowNavbar(true); // scrolling up
+      }
+
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [lastScrollY]);
+
   return (
-    <nav style={styles.navbar}>
+    <nav style={{ 
+      ...styles.navbar, 
+      transform: showNavbar ? 'translateY(0)' : 'translateY(-100%)',
+      transition: 'transform 0.3s ease-in-out'
+    }}>
       <div style={styles.left}>
         <HamburgerMenu />
       </div>
-
       <div style={styles.center}>
         <Link to="/" style={styles.link}>Home</Link>
         <Link to="/about" style={styles.link}>About</Link>
@@ -17,20 +95,24 @@ const Navbar: React.FC = () => {
         <Link to="/tutorials" style={styles.link}>Tutorials</Link>
         <Link to="/contact" style={styles.link}>Contact</Link>
       </div>
-
-      
     </nav>
   );
 };
-
 const styles: { [key: string]: React.CSSProperties } = {
   navbar: {
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    right: 0,
+    zIndex: 1000,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
     padding: '0.75rem 1.5rem',
     backgroundColor: '#f0f0f0',
     borderBottom: '1px solid #ddd',
+    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+    // No transform or transition here — handled inline above
   },
   left: {
     flex: '0 0 auto',
@@ -41,9 +123,6 @@ const styles: { [key: string]: React.CSSProperties } = {
     justifyContent: 'center',
     gap: '1.5rem',
   },
-  right: {
-    flex: '0 0 auto',
-  },
   link: {
     textDecoration: 'none',
     color: '#333',
@@ -51,5 +130,4 @@ const styles: { [key: string]: React.CSSProperties } = {
     fontSize: '1rem',
   },
 };
-
 export default Navbar;
