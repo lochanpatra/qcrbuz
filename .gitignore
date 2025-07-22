@@ -1,0 +1,97 @@
+# # Logs
+# logs
+# *.log
+# npm-debug.log*
+# yarn-debug.log*
+# yarn-error.log*
+# pnpm-debug.log*
+# lerna-debug.log*
+
+# node_modules
+# dist
+# dist-ssr
+# *.local
+
+# # Editor directories and files
+# .vscode/*
+# !.vscode/extensions.json
+# .idea
+# .DS_Store
+# *.suo
+# *.ntvs*
+# *.njsproj
+# *.sln
+# *.sw?
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Dependency directories
+node_modules/
+.bun/
+
+# Build output
+dist/
+dist-ssr/
+build/
+.next/
+out/
+.coverage/
+
+# Local environment
+.env
+.env.*.local
+*.local
+
+# Editor settings
+.vscode/
+!.vscode/extensions.json
+.idea/
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS-specific
+Thumbs.db
+ehthumbs.db
+Icon?
+._*
+
+# Optional cache
+.cache/
+.nyc_output/
+parcel-cache/
+.turbo/
+vite.svg
+vite.cache/
+
+# TypeScript
+*.tsbuildinfo
+
+# Testing
+coverage/
+test-results/
+jest-test-results.json
+
+# Puppeteer screenshots and output
+/screenshots/
+*.png
+
+# Optional: lock files
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
